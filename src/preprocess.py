@@ -2,12 +2,26 @@
 
 import os
 import re
+import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 # ==================================================
-# Inisialisasi NLP Tools
+# SAFE NLTK SETUP (UNTUK STREAMLIT CLOUD)
+# ==================================================
+
+def ensure_nltk():
+    try:
+        stopwords.words("indonesian")
+    except LookupError:
+        nltk.download("stopwords")
+        nltk.download("punkt")
+
+ensure_nltk()
+
+# ==================================================
+# INISIALISASI NLP TOOLS
 # ==================================================
 
 factory = StemmerFactory()
@@ -15,7 +29,7 @@ stemmer = factory.create_stemmer()
 stop_words = set(stopwords.words("indonesian"))
 
 # ==================================================
-# Tahapan Preprocessing
+# TAHAPAN PREPROCESSING
 # ==================================================
 
 def clean(text: str) -> str:
@@ -62,7 +76,7 @@ def preprocess_text(text: str) -> list:
 
 
 # ==================================================
-# Proses Folder
+# PROSES FOLDER (RAW → PROCESSED)
 # ==================================================
 
 def process_folder(input_folder: str, output_folder: str):
