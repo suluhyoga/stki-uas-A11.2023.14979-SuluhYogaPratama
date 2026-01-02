@@ -16,6 +16,7 @@ def ensure_nltk():
         stopwords.words("indonesian")
     except LookupError:
         nltk.download("stopwords")
+        nltk.download("punkt_tab")
         nltk.download("punkt")
 
 ensure_nltk()
