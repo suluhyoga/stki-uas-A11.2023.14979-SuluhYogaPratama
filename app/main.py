@@ -7,7 +7,7 @@ import os
 # Tambahkan root project ke PYTHONPATH
 # ==================================================
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.append(ROOT_DIR)
+sys.path.insert(0, ROOT_DIR)
 
 import streamlit as st
 from src.search import search_boolean, search_vector
